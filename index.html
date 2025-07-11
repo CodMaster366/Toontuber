@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ToonTuber</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    img {
+      width: 300px;
+      height: auto;
+      image-rendering: pixelated;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Press 1 = Idle | 2 = Happy | 3 = Angry</h3>
+  <img id="toon" src="assets/idle_idle.png" alt="ToonTuber">
+
+  <script>
+    // 💡 EDIT THIS SECTION ONLY TO CHANGE YOUR EMOTES & FILES
+    const emoteImages = {
+      idle: {
+        idle: "assets/idle_idle.png",
+        talking: "assets/idle_talking.gif",
+        peak: "assets/idle_peak.png"
+      },
+      happy: {
+        idle: "assets/happy_idle.png",
+        talking: "assets/happy_talking.gif",
+        peak: "assets/happy_peak.png"
+      },
+      angry: {
+        idle: "assets/angry_idle.png",
+        talking: "assets/angry_talking.gif",
+        peak: "assets/angry_peak.png"
+      }
+    };
+
+    // 🔁 Setup
+    let currentEmote = "idle";
+    let stateIndex = 0;
+    const stateOrder = ["idle", "talking", "peak"];
+    const toonImg = document.getElementById("toon");
+
+    // 🧠 Press 1/2/3 to switch emotes
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "1") currentEmote = "idle";
+      if (e.key === "2") currentEmote = "happy";
+      if (e.key === "3") currentEmote = "angry";
+    });
+
+    // 🔄 Change image every 1 second (simulate talking)
+    setInterval(() => {
+      const state = stateOrder[stateIndex % 3];
+      toonImg.src = emoteImages[currentEmote][state];
+      stateIndex++;
+    }, 1000);
+  </script>
+</body>
+</html>
